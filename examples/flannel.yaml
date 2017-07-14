@@ -1,0 +1,31 @@
+apiVersion: "giantswarm.io/v1"
+kind: FlannelNetwork
+metadata:
+  name: "test"
+spec:
+  cluster:
+    id: "test"
+    customer: "test"
+    namespace: "test"
+  bridge:
+    docker:
+      image: "foobar"
+    spec:
+      interface: "eth0"
+      privateNetwork: "10.0.4.0"
+      dns:
+        servers:
+        - "8.8.8.8"
+        - "8.8.4.4"
+      ntp:
+        servers:
+        - "0.de.pool.ntp.org"
+        - "1.de.pool.ntp.org"
+  flannel:
+    docker:
+      image: "quay.io/coreos/flannel"
+    spec:
+      network: ""
+      subnetLen: 30
+      runDir: "/run/flannel"
+      vni: 2
